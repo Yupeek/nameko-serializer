@@ -1,0 +1,17 @@
+# core dep
+nameko==2.12.0
+
+# testing stuff
+pytest==3.4.0
+pytest-cov==2.5.1
+
+# quality code dep
+isort
+pep8
+flake8==3.3.0
+pytz
+tzlocal
+
+# nameko extra dep
+regex
+

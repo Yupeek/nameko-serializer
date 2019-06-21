@@ -1,0 +1,5 @@
+AMQP_URI: amqp://guest:guest@localhost/
+
+
+serializer: nameko-serializer
+max_workers: 1
