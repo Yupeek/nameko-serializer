@@ -1,5 +1,6 @@
 sudo: true
 language: python
+dist: xenial
 services:
 - docker
 before_install:
