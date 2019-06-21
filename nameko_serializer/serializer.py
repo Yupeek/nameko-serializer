@@ -154,4 +154,4 @@ register_args = (
 
 def register_datecompatible_serializer():  # pragma: nocover
     from kombu.serialization import register
-    register('json_datecompatible', *register_args)
+    register('nameko-serializer', *register_args)
