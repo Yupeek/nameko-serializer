@@ -1,38 +1,31 @@
 sudo: false
 language: python
-
 services:
 - docker
-
-
 before_install:
-- docker run -d --rm -p 15672:15672 -p 5672:5672 -p 5671:5671 --name nameko-rabbitmq nameko/nameko-rabbitmq:3.6.6
-
+- docker run -d --rm -p 15672:15672 -p 5672:5672 -p 5671:5671 --name nameko-rabbitmq
+  nameko/nameko-rabbitmq:3.6.6
 cache: pip
-
 python:
-- '2.7'
-- '3.5'
 - '3.6'
 install:
 - pip install tox-travis virtualenv tox python-coveralls
-
 script:
 - QUIET=true tox
-
 stages:
-- tox
+- test
 - deploy
-
 jobs:
   include:
-  # deploy if master and tag
-  - stage: tox
+  - stage: test
+    python:
+    - '2.7'
+    - '3.6'
+    - '3.7'
     script:
     - QUIET=true tox
-
   - stage: deploy
-    script: skip # to not run Travis' default script
+    script: skip
     install: skip
     on:
       repo: Yupeek/nameko-serializer
@@ -40,9 +33,8 @@ jobs:
     deploy:
       provider: pypi
       user: yupeek
-
       password:
-        secure: e24svC/SHS9PcbgTqv40QXsiziygb9KgYqz6pjwI5eIM05s5a9kuF7OadV+Kd2Gq/XlxpPn9wKomYUoBLwg1eZs4kpAo8qDMZp51xi9hR8gYHmmOzvmV2NTfSdeEKEGHNbSNid3GUOZiKm3IDw3ym7983kkLLVsdRlty8b/X8kqPH+m+M+1lXl7d5l4rH3+rov8udasBGX4h3x8qdI1YKZfiL33gW632Fr5rrkC3ISTX5ClI8SgDZHdc3uG8C6u9TLTwjcxrAtTvIBHIg8BX4i8HR0o8LdyfHARqZbk6g2N6sK5B1kIgXumiY2gA9g5cnz/TEC+ZJkn2AueEHJkpY5gyJnmiC67ro3v0h3Gkl3v4H7k3GhbmZiMjA3Vzt6Ea/hBCNk7YfBo22j8h65F8KuS24OiQjxPO+UFI6bzYnAvP6HQdiM9M3Wai7Szv+GYRLRqZt5psxEtg9pvqZLLmr6LW+kvFjYG1bYVGNZG2Lr0VLQ99PVfV+LwV74XpWAUBLFsGuTAEdIuWUln0zeXwLRh/FQXhthVc1/A9uEviBVT9yaiYG8KvRd43b5NGlaXsPjH4bkj3xVpEBE5OhO64C33sNBABI0xbaFzLQgbrH4FP1MPhzxxK4p5GiXa1w+WfPtF/gFYfBGjP7NtDkKhFAS/UZ/WoPgRWQXkBtqWBnw8=
-
+        secure: Qz4iVVth1xdwfLQZZe13dFeibKF+fzSM2UMlwxzgiII3O8xTQXA6pjL76HOWEaFLafYt1RokQttCq2RxgHm3BS4uUWfPUtSXcx4CQND09YcnKMvXnrehP5tpjAW61yGqNLHGWBOzY81+jHl8TMdU76e5CsX3V0h+nQVXu1bh4vzF9Z0CqwqOWtOO37Ocfu/qZzwi4ytuKcsyntMXCJplBGrGHEFjhW8s0fjWJgrtjLtQKR7b8unR+mZNf7TN7iqg9Atyoy+IhHh/SWH/Tu7EKHk159u86imnzwKwYSkiCp3r8f0kp/KfEPYc1B6s4fVRR6F8D05sMmkXBOtJw5ROZUz1hEgLLCW/Xj4bTyin1HSp/s0WLs2b0m2jP3dQ+LFulXOw4/1aCRF2LDV/i+EjOC0bDmBHOokmjq6o82jCOtAJeJsH4sGFGgwHUloLbO8PT3vjy4o+SglC8PI35dhpOFadmZXBY55eVIjxrwRYqEYBXbVhiArnOSin1mMunxZOWx/w6IHYcoCA4N3wQVrlAKkjgooCwudMY6sVxPMl7YJz6JNi9QSmmUhKx2VjnbVjcJs+koaK7cJs8c8XqXPShqCROWne7qg1REU0kdCsVfxxKC7gOC/yRELDLPqMbhw9TNOMjRMH3zat/8D/JmIqOd/iylZZ34DUaRDCo1GWqDk=
       distributions: sdist bdist_wheel
       skip_existing: true
+
