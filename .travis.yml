@@ -16,10 +16,11 @@ python:
 - '3.7'
 
 install:
-- pip install tox-travis virtualenv tox python-coveralls
+- pip install tox-travis virtualenv tox python-coveralls coveralls
 
 script:
 - QUIET=true tox
+- coveralls
 
 stages:
 - test
