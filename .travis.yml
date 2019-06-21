@@ -38,6 +38,7 @@ jobs:
     on:
       repo: Yupeek/nameko-serializer
       tags: true
+    if: tag IS present
     deploy:
       provider: pypi
       user: yupeek
