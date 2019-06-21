@@ -20,7 +20,6 @@ install:
 
 script:
 - QUIET=true tox
-- coveralls
 
 stages:
 - test
@@ -29,6 +28,8 @@ stages:
 jobs:
   include:
   - stage: test
+    after_success:
+    - coveralls
   - stage: deploy
     script: skip
     install: skip
