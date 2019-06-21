@@ -40,7 +40,6 @@ setup(
         'Operating System :: OS Independent',
         'Topic :: Software Development :: Libraries',
         'Topic :: Utilities',
-        'Framework :: Nameko',
     ],
 
 )
