@@ -14,9 +14,8 @@ python:
 - '3.5'
 - '3.6'
 install:
-- pip install tox-travis
-- pip install python-coveralls
-- travis_retry pip install "virtualenv<14.0.0" "tox>=1.9"
+- pip install tox-travis virtualenv tox python-coveralls
+
 script:
 - QUIET=true tox
 
