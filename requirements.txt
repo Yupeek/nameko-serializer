@@ -2,7 +2,7 @@
 nameko==2.14.0
 
 # testing stuff
-pytest==3.4.0
+pytest==9.0.3
 pytest-cov==2.5.1
 
 # quality code dep
